@@ -4,7 +4,9 @@ const TWITTER = {
   access_token_key: '705860847755620353-DhoBJZ63fInfy5omJLmvw6wykZJr3xa',
   access_token_secret: 'Mprx4I38KpE1PPibpCx2c5oOIsxbWrboIsyvDc5pPgm33',
 };
-const OMDB = '2e773d05';
+const OMDB = {
+  apikey: '2e773d05',
+};
 
 const SPOTIFY = {
   client_id: 'ef07d898ac4d4c84a3fa259d396d9a72',

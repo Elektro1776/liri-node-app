@@ -8,23 +8,24 @@ let spotify = (spec) => {
   secret: spec.client_secret,
 });
 
-  function getSongInfo(cb) {
-    spotify.search({ type: 'track', query: 'All the Small Things', limit: 10 }, function(err, data) {
+  function getSongInfo(songTrack, cb) {
+    spotify.search({ type: 'track', query: (songTrack || 'Ace of Base') , limit: 10 }, function(err, data) {
       if (err) {
-        return console.log('Error occurred: ' + err);
+        cb(err, null)
+        return;
       }
       let details =  data.tracks.items.map(findDetails);
-       cb(details);
+       return cb(null,details);
     });
   }
 
   function findDetails(info) {
     let trackInfo = {};
     Object.keys(info).map(key => {
-      console.log('What is the info with key', key);
+      // console.log('What is the info with key', key);
       switch (key) {
         case 'album':
-          trackInfo.albumName = info[key].name;
+          trackInfo.albumName = info['album'].name;
           break;
         case 'name':
            trackInfo.name = info[key]
@@ -35,7 +36,9 @@ let spotify = (spec) => {
           });
           trackInfo.artistName = artistName[0];
           break;
-
+        case 'preview_url':
+          trackInfo.preview_url = info[key];
+        break;
         default:
 
       };
