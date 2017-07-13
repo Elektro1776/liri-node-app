@@ -11,6 +11,7 @@ let spotify = (spec) => {
   function getSongInfo(songTrack, cb) {
     spotify.search({ type: 'track', query: (songTrack || 'Ace of Base') , limit: 10 }, function(err, data) {
       if (err) {
+        console.log(err);
         cb(err, null)
         return;
       }
@@ -22,7 +23,6 @@ let spotify = (spec) => {
   function findDetails(info) {
     let trackInfo = {};
     Object.keys(info).map(key => {
-      // console.log('What is the info with key', key);
       switch (key) {
         case 'album':
           trackInfo.albumName = info['album'].name;
